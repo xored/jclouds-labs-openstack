@@ -28,7 +28,7 @@
   <!-- TODO: when out of labs, switch to org.jclouds.api -->
   <groupId>org.apache.jclouds.labs</groupId>
   <artifactId>openstack-neutron</artifactId>
-  <version>1.8.0</version>
+  <version>1.8.0x</version>
   <name>jclouds openstack-neutron api</name>
   <description>jclouds components to access an implementation of OpenStack Neutron</description>
   <packaging>bundle</packaging>
@@ -44,9 +44,9 @@
     <test.jclouds.keystone.credential-type>passwordCredentials</test.jclouds.keystone.credential-type>
     <jclouds.osgi.export>org.jclouds.openstack.neutron.v2_0*;version="${project.version}"</jclouds.osgi.export>
     <jclouds.osgi.import>
-      org.jclouds.rest.internal;version="${jclouds.version}",
+      org.jclouds.rest.internal;version="${project.parent.version}",
       org.jclouds.labs*;version="${project.version}",
-      org.jclouds*;version="${jclouds.version}",
+      org.jclouds*;version="${project.parent.version}",
       *
     </jclouds.osgi.import>
   </properties>
