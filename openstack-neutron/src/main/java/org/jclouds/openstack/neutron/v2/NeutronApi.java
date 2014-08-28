@@ -35,9 +35,12 @@ import org.jclouds.rest.annotations.EndpointParam;
 import com.google.common.base.Optional;
 import com.google.inject.Provides;
 
+import javax.ws.rs.Path;
+
 /**
  * Provides synchronous access to the OpenStack Networking (Neutron) v2 API
  */
+@Path("/v2.0")
 public interface NeutronApi extends Closeable {
    /**
     * @return the Region codes configured
