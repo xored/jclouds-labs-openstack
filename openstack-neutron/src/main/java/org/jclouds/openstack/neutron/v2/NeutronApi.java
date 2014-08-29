@@ -24,6 +24,7 @@ import javax.ws.rs.Path;
 import org.jclouds.Constants;
 import org.jclouds.location.Region;
 import org.jclouds.location.functions.RegionToEndpoint;
+import org.jclouds.openstack.neutron.v2.extensions.FloatingIPApi;
 import org.jclouds.openstack.neutron.v2.extensions.RouterApi;
 import org.jclouds.openstack.neutron.v2.features.NetworkApi;
 import org.jclouds.openstack.neutron.v2.features.PortApi;
@@ -89,4 +90,9 @@ public interface NeutronApi extends Closeable {
    @Delegate
    Optional<? extends RouterApi> getRouterExtensionApi(@EndpointParam(parser = RegionToEndpoint.class) String region);
 
+   /**
+    * Provides synchronous access to Floating IP features.
+    */
+   @Delegate
+   Optional<? extends FloatingIPApi> getFloatingIPApi(@EndpointParam(parser = RegionToEndpoint.class) String region);
 }
