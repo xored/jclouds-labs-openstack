@@ -47,7 +47,7 @@ public class FloatingIPToPagedIterable extends Arg0ToPagedIterable.FromCaller<Fl
    @Override
    protected Function<Object, IterableWithMarker<FloatingIP>> markerToNextForArg0(Optional<Object> arg0) {
       String region = arg0.isPresent() ? arg0.get().toString() : null;
-      final FloatingIPApi floatingIPApi = api.getFloatingIpApiExtensionApi(region).get();
+      final FloatingIPApi floatingIPApi = api.getFloatingIPApi(region).get();
       return new Function<Object, IterableWithMarker<FloatingIP>>() {
 
          @SuppressWarnings("unchecked")

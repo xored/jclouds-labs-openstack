@@ -84,5 +84,5 @@ public interface NeutronApi extends Closeable {
 	 * Provides synchronous access to Floating IP features.
 	 */
 	@Delegate
-	Optional<? extends FloatingIPApi> getFloatingIpApiExtensionApi(@EndpointParam(parser = RegionToEndpoint.class) String region);
+	Optional<? extends FloatingIPApi> getFloatingIPApi(@EndpointParam(parser = RegionToEndpoint.class) String region);
 }
