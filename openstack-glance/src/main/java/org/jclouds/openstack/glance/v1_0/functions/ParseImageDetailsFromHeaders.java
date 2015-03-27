@@ -61,16 +61,18 @@ public class ParseImageDetailsFromHeaders implements Function<HttpResponse, Imag
 
    @Override
    public ImageDetails apply(HttpResponse from) {
-      ImageDetails.Builder<?> builder = ImageDetails.builder().id(from.getFirstHeaderOrNull(ID.asHeader()))
-            .name(from.getFirstHeaderOrNull(NAME.asHeader())).checksum(from.getFirstHeaderOrNull(CHECKSUM.asHeader()))
-            .minDisk(Long.parseLong(from.getFirstHeaderOrNull(MIN_DISK.asHeader())))
-            .minRam(Long.parseLong(from.getFirstHeaderOrNull(MIN_RAM.asHeader())))
-            .isPublic(Boolean.parseBoolean(from.getFirstHeaderOrNull(IS_PUBLIC.asHeader())))
-            .createdAt(dateService.iso8601SecondsDateParse(from.getFirstHeaderOrNull(CREATED_AT.asHeader())))
-            .updatedAt(dateService.iso8601SecondsDateParse(from.getFirstHeaderOrNull(UPDATED_AT.asHeader())))
-            .owner(from.getFirstHeaderOrNull(OWNER.asHeader()))
-            .location(from.getFirstHeaderOrNull(LOCATION.asHeader()))
-            .status(Status.fromValue(from.getFirstHeaderOrNull(STATUS.asHeader())));
+	   ImageDetails.Builder<?> builder = ImageDetails.builder()
+			   .id(from.getFirstHeaderOrNull(ID.asHeader()))
+			   .name(from.getFirstHeaderOrNull(NAME.asHeader()))
+			   .checksum(from.getFirstHeaderOrNull(CHECKSUM.asHeader()))
+			   .minDisk(Long.parseLong(from.getFirstHeaderOrNull(MIN_DISK.asHeader())))
+			   .minRam(Long.parseLong(from.getFirstHeaderOrNull(MIN_RAM.asHeader())))
+			   .isPublic(Boolean.parseBoolean(from.getFirstHeaderOrNull(IS_PUBLIC.asHeader())))
+			   .createdAt(dateService.iso8601SecondsDateParse(from.getFirstHeaderOrNull(CREATED_AT.asHeader())))
+			   .updatedAt(dateService.iso8601SecondsDateParse(from.getFirstHeaderOrNull(UPDATED_AT.asHeader())))
+			   .owner(from.getFirstHeaderOrNull(OWNER.asHeader()))
+			   .location(from.getFirstHeaderOrNull(LOCATION.asHeader()))
+			   .status(Status.fromValue(from.getFirstHeaderOrNull(STATUS.asHeader())));
 
       String containerFormat = from.getFirstHeaderOrNull(CONTAINER_FORMAT.asHeader());
       String diskFormat = from.getFirstHeaderOrNull(DISK_FORMAT.asHeader());
@@ -88,7 +90,7 @@ public class ParseImageDetailsFromHeaders implements Function<HttpResponse, Imag
          String headerName = headerEntry.getKey();
          if (!Strings.isNullOrEmpty(headerName) && headerName.startsWith(propertyHeader)
                && headerName.length() > propertyHeader.length()) {
-            String propertyName = headerName.substring(PROPERTY.asHeader().length() + 1).toLowerCase();
+			 String propertyName = headerName.substring(PROPERTY.asHeader().length() + 1).toLowerCase();
             String propertyValue = headerEntry.getValue();
             properties.put(propertyName, propertyValue);
          }
