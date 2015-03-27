@@ -16,8 +16,8 @@
  */
 package org.jclouds.openstack.glance.v1_0.functions;
 
-import static org.testng.Assert.assertEquals;
-
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 import org.jclouds.date.internal.SimpleDateFormatDateService;
 import org.jclouds.http.HttpResponse;
 import org.jclouds.openstack.glance.v1_0.domain.ContainerFormat;
@@ -26,7 +26,7 @@ import org.jclouds.openstack.glance.v1_0.domain.Image;
 import org.jclouds.openstack.glance.v1_0.domain.ImageDetails;
 import org.testng.annotations.Test;
 
-import com.google.common.collect.ImmutableMultimap;
+import static org.testng.Assert.assertEquals;
 
 @Test(groups = "unit", testName = "ParseImageDetailsFromHeadersTest")
 public class ParseImageDetailsFromHeadersTest {
@@ -37,24 +37,26 @@ public class ParseImageDetailsFromHeadersTest {
                                        .message("HTTP/1.1 200 OK")
                                        .statusCode(200)
                                        .headers(ImmutableMultimap.<String, String>builder()
-                                                .put("X-Image-Meta-Id", "fcc451d0-f6e4-4824-ad8f-70ec12326d07")
-                                                .put("X-Image-Meta-Deleted", "False")
-                                                .put("X-Image-Meta-Container_format", "bare")
-                                                .put("X-Image-Meta-Checksum", "233afa7b8809d840679b5f0d36d7350a")
-                                                .put("X-Image-Meta-Protected", "False")
-                                                .put("X-Image-Meta-Min_disk", "0")
-                                                .put("X-Image-Meta-Created_at", "2012-05-18T18:06:44")
-                                                .put("X-Image-Meta-Size", "65645798")
-                                                .put("X-Image-Meta-Status", "active")
-                                                .put("X-Image-Meta-Is_public", "True")
-                                                .put("X-Image-Meta-Min_ram", "0")
-                                                .put("X-Image-Meta-Owner", "5821675")
-                                                .put("X-Image-Meta-Updated_at", "2012-05-18T18:42:58")
-                                                .put("X-Image-Meta-Disk_format", "raw")
-                                                .put("X-Image-Meta-Name", "debian")
-                                                .put("Location", "http://HOST/v1/images/fcc451d0-f6e4-4824-ad8f-70ec12326d07")
-                                                .put("Etag", "233afa7b8809d840679b5f0d36d7350a")
-                                                .build())
+											   .put("X-Image-Meta-Id", "fcc451d0-f6e4-4824-ad8f-70ec12326d07")
+											   .put("X-Image-Meta-Deleted", "False")
+											   .put("X-Image-Meta-Container_format", "bare")
+											   .put("X-Image-Meta-Checksum", "233afa7b8809d840679b5f0d36d7350a")
+											   .put("X-Image-Meta-Protected", "False")
+											   .put("X-Image-Meta-Min_disk", "0")
+											   .put("X-Image-Meta-Created_at", "2012-05-18T18:06:44")
+											   .put("X-Image-Meta-Size", "65645798")
+											   .put("X-Image-Meta-Status", "active")
+											   .put("X-Image-Meta-Is_public", "True")
+											   .put("X-Image-Meta-Min_ram", "0")
+											   .put("X-Image-Meta-Owner", "5821675")
+											   .put("X-Image-Meta-Updated_at", "2012-05-18T18:42:58")
+											   .put("X-Image-Meta-Disk_format", "raw")
+											   .put("X-Image-Meta-Name", "debian")
+											   .put("X-Image-Meta-Property-Description", "debian image description")
+											   .put("Location",
+													   "http://HOST/v1/images/fcc451d0-f6e4-4824-ad8f-70ec12326d07")
+											   .put("Etag", "233afa7b8809d840679b5f0d36d7350a")
+											   .build())
                                        .build();
 
    public void test() {
@@ -65,6 +67,7 @@ public class ParseImageDetailsFromHeadersTest {
       return ImageDetails.builder()
                         .id("fcc451d0-f6e4-4824-ad8f-70ec12326d07")
                         .name("debian")
+                        .properties(ImmutableMap.of("description", "debian image description"))
                         .containerFormat(ContainerFormat.BARE)
                         .diskFormat(DiskFormat.RAW)
                         .checksum("233afa7b8809d840679b5f0d36d7350a")
