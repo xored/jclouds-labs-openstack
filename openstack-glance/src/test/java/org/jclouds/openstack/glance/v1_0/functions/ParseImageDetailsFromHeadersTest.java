@@ -58,9 +58,38 @@ public class ParseImageDetailsFromHeadersTest {
 											   .put("Etag", "233afa7b8809d840679b5f0d36d7350a")
 											   .build())
                                        .build();
+   public HttpResponse responseWithDateMilli = HttpResponse.builder()
+                                       .message("HTTP/1.1 200 OK")
+                                       .statusCode(200)
+                                       .headers(ImmutableMultimap.<String, String>builder()
+											   .put("X-Image-Meta-Id", "fcc451d0-f6e4-4824-ad8f-70ec12326d07")
+											   .put("X-Image-Meta-Deleted", "False")
+											   .put("X-Image-Meta-Container_format", "bare")
+											   .put("X-Image-Meta-Checksum", "233afa7b8809d840679b5f0d36d7350a")
+											   .put("X-Image-Meta-Protected", "False")
+											   .put("X-Image-Meta-Min_disk", "0")
+											   .put("X-Image-Meta-Created_at", "2012-05-18T18:06:44.000+0000")
+											   .put("X-Image-Meta-Size", "65645798")
+											   .put("X-Image-Meta-Status", "active")
+											   .put("X-Image-Meta-Is_public", "True")
+											   .put("X-Image-Meta-Min_ram", "0")
+											   .put("X-Image-Meta-Owner", "5821675")
+											   .put("X-Image-Meta-Updated_at", "2012-05-18T18:42:58.000+0000")
+											   .put("X-Image-Meta-Disk_format", "raw")
+											   .put("X-Image-Meta-Name", "debian")
+											   .put("X-Image-Meta-Property-Description", "debian image description")
+											   .put("Location",
+													   "http://HOST/v1/images/fcc451d0-f6e4-4824-ad8f-70ec12326d07")
+											   .put("Etag", "233afa7b8809d840679b5f0d36d7350a")
+											   .build())
+                                       .build();
 
    public void test() {
       assertEquals(fn.apply(response).toString(), expected().toString());
+   }
+
+   public void testResponseWithDateMilli() {
+		assertEquals(fn.apply(responseWithDateMilli).toString(), expected().toString());
    }
 
    public ImageDetails expected() {
